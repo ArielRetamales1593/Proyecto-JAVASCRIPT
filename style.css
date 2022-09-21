@@ -1,0 +1,20 @@
+#formulario{
+
+border: solid 2px black;
+
+margin: 15rem;
+
+
+}
+
+
+body{background-color: #cdced0;}
+
+h1{margin-bottom: 1rem;
+margin-top: 22rem;
+
+border: solid 5px cadetblue ;
+border-radius: 5px;
+margin-left: 5rem;
+margin-right: 5rem;
+}
