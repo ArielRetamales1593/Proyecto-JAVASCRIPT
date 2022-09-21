@@ -1,6 +1,14 @@
 // SIMULADOR TIENDA DE ARTICULOS MUSICALES- Pedales
 
-// eventos 
+
+
+//  A realizar
+
+// Aplicar funciones para simplificar el codigo
+// Ocupar tolowerCase
+// triple===
+// utilizar funcion constructora
+
 
 
 // Formulario de ingreso 
@@ -11,43 +19,31 @@ const inputContraseña = document.getElementById("inputPassword")
 const btn = document.getElementById("btnEnviar")
 
 
-formulario.addEventListener("submit",(e)=>{
-e.preventDefault()
-console.log(e)
+formulario.addEventListener("submit", (e) => {
+    e.preventDefault()
+    console.log(e)
 
 
-const userData={
-nombre:inputMail.value,
-contraseña:inputContraseña.value,
-}
-console.log(userData)
+    const userData = {
+        nombre: inputMail.value,
+        contraseña: inputContraseña.value,
+    }
+    console.log(userData)
 
-formulario.reset()
+    formulario.reset()
 
 
 })
 
 
 
-    // Definicion de constantes
-    const RepeatSpectralV = 230000
-    const ChurchlostV = 200000
-    const tremolookV = 150000
-    const tunerV = 50000
-    const O240V = 100000
-    const compV = 65000
-
-
-
-    
-
-
-
-
-    // Declaracion de variables
-    let tipo = ""
-    let seleccion = ""
-    let cantidad = ""
+// Definicion de constantes
+const RepeatSpectralV = 230000
+const ChurchlostV = 200000
+const tremolookV = 150000
+const tunerV = 50000
+const O240V = 100000
+const compV = 65000
 
 
 
@@ -55,67 +51,80 @@ formulario.reset()
 
 
 
- // utilizar funcion constructora
-    // array de elementos
 
-const contenedorProductos=document.getElementById("contenedor-productos")
+// Declaracion de variables
+let tipo = ""
+let seleccion = ""
+let cantidad = ""
 
-    const tipoSpedales = [{
-        id:1,
+
+
+
+
+
+
+
+// Array de elementos
+const contenedorProductos = document.getElementById("contenedor-productos")
+
+const tipoSpedales = [{
+        id: 1,
         nombre: "RepeatSpectral",
         tipo: "delay",
         color: "azul",
         valor: 230000,
         familia: "modulacion",
-        cantidad:2,
+        cantidad: 2,
 
     }, {
-        id:2,
+        id: 2,
         nombre: "Churchlost",
         tipo: "reverb",
         color: "rojo",
         valor: 200000,
         familia: "modulacion",
-        cantidad:1
+        cantidad: 1
 
 
 
     }, {
-        id:3,
+        id: 3,
         nombre: "tremolook",
         tipo: "tremolo",
         color: "verde",
         valor: 150000,
         familia: "modulacion",
-        cantidad:5
+        cantidad: 5
 
 
-    }, {id:4,
+    }, {
+        id: 4,
         nombre: "t-uner",
         tipo: "afinador",
         color: "azul",
         valor: 50000,
         familia: "otros",
-        cantidad:4
+        cantidad: 4
 
 
-    }, {id:5,
+    }, {
+        id: 5,
         nombre: "a240",
         tipo: "overdrive",
         color: "celeste",
         valor: 100000,
         familia: "overdrive",
-        cantidad:3,
+        cantidad: 3,
 
     }, {
 
-        id:6,
+        id: 6,
         nombre: "xerocomp",
         tipo: "compresor",
         color: "rojo",
         valor: 65000,
         familia: "otros",
-        cantidad :2,
+        cantidad: 2,
 
 
     }
@@ -127,34 +136,35 @@ const contenedorProductos=document.getElementById("contenedor-productos")
 // let div2;
 
 
+// variables
+let botonMostrar = document.getElementById("mostrar")
+let botonBorrar = document.getElementById("borrar")
 
-let botonMostrar=document.getElementById("mostrar")
-let botonBorrar=document.getElementById("borrar")
+// Funcion para muestra de disponibilidad 
+const fmuestra = () => {
 
-const fmuestra=()=>{
-
-for (const iterator of tipoSpedales) {
-div2=document.createElement("div2")
-div2.innerHTML= `<h3 class="text-center"> ${iterator.nombre} <h3>
+    for (const iterator of tipoSpedales) {
+        div2 = document.createElement("div2")
+        div2.innerHTML = `<h3 class="text-center"> ${iterator.nombre} <h3>
 <h6 class="text-center">Disponibles: ${iterator.cantidad}<h6>
 `
-document.body.appendChild(div2)
-}
+        document.body.appendChild(div2)
+    }
 
 }
 
-
-botonMostrar.addEventListener("click",fmuestra)
-
-
+// boton para activar 
+botonMostrar.addEventListener("click", fmuestra)
 
 
-tipoSpedales.forEach((pedal)=>{
-let column=document.createElement("div")
-column.className="col-md-2 mt-2"
 
-column.nombre=`columna-${pedal.nombre}`
-column.innerHTML=`
+// Transformar a cards-- array de elementos a traves de un for each
+tipoSpedales.forEach((pedal) => {
+    let column = document.createElement("div")
+    column.className = "col-md-2 mt-2"
+
+    column.nombre = `columna-${pedal.nombre}`
+    column.innerHTML = `
 <div class="card"> 
 <div class="card-body">
 <p class="card-text"> Nombre: <h4>${pedal.nombre}<h4><p>
@@ -169,8 +179,8 @@ column.innerHTML=`
 
 `
 
-contenedorProductos.append(column)
-} )
+    contenedorProductos.append(column)
+})
 
 
 
@@ -184,23 +194,11 @@ contenedorProductos.append(column)
 
 
 
-
+// boton que activa la compra
 
 let boton1 = document.getElementById("boton1")
 
 boton1.addEventListener("click", () => {
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -386,14 +384,17 @@ boton1.addEventListener("click", () => {
                 let tipoOtros = parseInt(prompt(" Accesorios \n1-Afinador \n2-Compresor"))
                 if (tipoOtros == 1) {
 
+
+                    const filtroAf = tipoSpedales.find(a => a.tipo == "afinador")
+                    console.log(filtroAf);
+                    alert("\nT-unner Disponible" + "su precio es de " + tunerV + "$");
+
+
                     let seleccionf = prompt("¿Desea comprarlo?, ingrese un si para continuar")
 
-                    if (seleccionf == "si") {
+                    if (seleccionf === "si") {
 
 
-                        const filtroAf = tipoSpedales.find(a => a.tipo == "afinador")
-                        console.log(filtroAf);
-                        alert("\nT-unner Disponible" + "su precio es de " + tunerV + "$");
 
 
                         cantidad = parseInt(prompt("Ingrese la cantidad"));
@@ -428,14 +429,17 @@ boton1.addEventListener("click", () => {
 
                 } else if (tipoOtros == "2") {
 
+
+                    const filtroCom = tipoSpedales.find(c => c.tipo == "afinador")
+                    console.log(filtroCom);
+                    alert("\n Xerocomp Disponible-" + "su precio es de " + compV + "$");
+
+
                     let seleccionf = prompt("¿Desea comprarlo?,ingrese un si para continuar")
 
-                    if (seleccionf == "si") {
+                    if (seleccionf === "si") {
 
 
-                        const filtroCom = tipoSpedales.find(c => c.tipo == "afinador")
-                        console.log(filtroCom);
-                        alert("\n Xerocomp Disponible-" + "su precio es de " + compV + "$");
 
 
                         cantidad = parseInt(prompt("Ingrese la cantidad"));
