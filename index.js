@@ -2,6 +2,11 @@
 
 
 
+
+
+
+
+
 //  A realizar
 
 // Aplicar funciones para simplificar el codigo
@@ -11,12 +16,23 @@
 
 
 
+
+// urgente   funcion borrar-funcion calcular-------------ocupar storage
+
+
+
+
 // Formulario de ingreso 
+
 
 const formulario = document.getElementById("formulario")
 const inputMail = document.getElementById("inputNombre")
 const inputContraseña = document.getElementById("inputPassword")
 const btn = document.getElementById("btnEnviar")
+
+
+const userData=""
+
 
 
 formulario.addEventListener("submit", (e) => {
@@ -26,15 +42,22 @@ formulario.addEventListener("submit", (e) => {
 
     const userData = {
         nombre: inputMail.value,
-        contraseña: inputContraseña.value,
+        mail: inputContraseña.value,
     }
+
     console.log(userData)
 
     formulario.reset()
 
+    let usuarioJason=JSON.stringify(userData)
+    localStorage.setItem("usuario",usuarioJason)
+
 
 })
 
+
+let saludo= localStorage.getItem("usuario")
+console.log(saludo)
 
 
 // Definicion de constantes
@@ -75,6 +98,7 @@ const tipoSpedales = [{
         valor: 230000,
         familia: "modulacion",
         cantidad: 2,
+        img: './img/over.png',
 
     }, {
         id: 2,
@@ -83,7 +107,8 @@ const tipoSpedales = [{
         color: "rojo",
         valor: 200000,
         familia: "modulacion",
-        cantidad: 1
+        cantidad: 1,
+        img: './img/delay.png'
 
 
 
@@ -94,17 +119,20 @@ const tipoSpedales = [{
         color: "verde",
         valor: 150000,
         familia: "modulacion",
-        cantidad: 5
+        cantidad: 5,
+        img: './img/dist.png'
 
 
     }, {
         id: 4,
+        img: './img/over.png',
         nombre: "t-uner",
         tipo: "afinador",
         color: "azul",
         valor: 50000,
         familia: "otros",
-        cantidad: 4
+        cantidad: 4,
+        img: './img/over.png'
 
 
     }, {
@@ -115,6 +143,7 @@ const tipoSpedales = [{
         valor: 100000,
         familia: "overdrive",
         cantidad: 3,
+        img: './img/over.png'
 
     }, {
 
@@ -125,6 +154,8 @@ const tipoSpedales = [{
         valor: 65000,
         familia: "otros",
         cantidad: 2,
+        img: './img/dist.png',
+
 
 
     }
@@ -132,7 +163,8 @@ const tipoSpedales = [{
 
 ]
 
-
+let productosJson=JSON.stringify(tipoSpedales)
+localStorage.setItem("produ",productosJson)
 // let div2;
 
 
@@ -158,37 +190,127 @@ botonMostrar.addEventListener("click", fmuestra)
 
 
 
+function agregarCarrito(pedalesId){
+let item=tipoSpedales.find((pedales)=>pedales.id===pedalesId)
+carrito.push(item)
+console.log(carrito)
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
 // Transformar a cards-- array de elementos a traves de un for each
+
+const carrito=[];
+
 tipoSpedales.forEach((pedal) => {
     let column = document.createElement("div")
-    column.className = "col-md-2 mt-2"
+    column.className = "col-md-3 mt-3"
 
     column.nombre = `columna-${pedal.nombre}`
     column.innerHTML = `
 <div class="card"> 
 <div class="card-body">
+<div><img class="imagen" src=${pedal.img}><div>
 <p class="card-text"> Nombre: <h4>${pedal.nombre}<h4><p>
 <p class="card-text"> Precio: <b>${pedal.valor}<p>
 <p class="card-text"> Tipo: <b>${pedal.tipo} <p>
 <p class="card-text"> Color: <b>${pedal.color}<p>
+<button onclick="agregarCarrito(${pedal.id})" class="buy">Agregar</button>
+
 
 <div>
 <div> 
 
 
-
 `
 
+
+
+
     contenedorProductos.append(column)
+
+  
+ 
+
+
 })
 
 
+function agregarCarrito(pedalesId) {
+    let item = tipoSpedales.find((pedales) => pedales.id === pedalesId)
+    carrito.push(item)
+    console.log(carrito)
+  renderCarro()
+  calcularTotal()
+   
+
+}
+
+const contenedorCarrito=document.querySelector("#contenedor1")
+const renderCarro=()=>{
+contenedorCarrito.innerHTML=" "
+carrito.forEach((item)=>{
+let div3=document.createElement("div")
+div3.innerHTML=`
+<div id="card2">
+<div id="imgbox2">
+<img src=${item.img}
+
+
+</div>
+
+
+<h2>${item.nombre}<h2>
+<p>Tipo: ${item.tipo}<p>
+<p>Valor:${item.valor}<p>
+<button onclick="eliminarItem(${item.id})"> Eliminar item</button>
+<div>
+`
+contenedorCarrito.append(div3)
 
 
 
 
 
+}     )
 
+
+
+
+}
+
+const eliminarItem=(id)=>{
+let borrar=carrito.find((producto)=>producto.id===id)
+let indice=carrito.indexOf(borrar)
+carrito.splice(indice,1)
+renderCarro()
+calcularTotal()
+
+}
+
+
+
+
+const precio=document.querySelector("#preciototal")
+calcularTotal=()=>{
+let cont= 0
+carrito.forEach((pre)=> {
+
+    cont += pre.valor
+})
+
+precio.innerHTML= "Total: "+cont
+}
 
 
 
@@ -496,6 +618,11 @@ boton1.addEventListener("click", () => {
 
 
 
+ 
+
+
+
+
     // FUNCION 20% DESCUENTO
     function descuento20(dato1, dato2) {
 
@@ -539,3 +666,39 @@ boton1.addEventListener("click", () => {
         alert("tu valor final sin descuento es de " + total)
     }
 })
+
+
+// modo oscuro
+
+const bdark= document.querySelector("#bdark");
+const body=document.querySelector("body");
+cargar();
+
+bdark.addEventListener("click",e =>{
+body.classList.toggle("darkmode")
+store(body.classList.contains("darkmode"))
+ 
+
+
+
+})
+
+
+function cargar(){
+    const darkmode=localStorage.getItem("darkmode");
+    if(!darkmode){
+
+        store("false");
+
+     } else if (darkmode==="true"){
+
+       body.classList.add("darkmode"); }
+    }
+  
+
+ 
+
+function store(value){
+
+    localStorage.setItem("darkmode",value)
+}

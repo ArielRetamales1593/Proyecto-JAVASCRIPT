@@ -1,20 +1,55 @@
-#formulario{
+#formulario {
 
-border: solid 2px black;
+    border: solid 2px black;
 
-margin: 15rem;
+    margin: 15rem;
 
 
 }
 
 
-body{background-color: #cdced0;}
-
-h1{margin-bottom: 1rem;
-margin-top: 22rem;
-
-border: solid 5px cadetblue ;
-border-radius: 5px;
-margin-left: 5rem;
-margin-right: 5rem;
+body {
+    background-color: #cdced0;
 }
+
+h1 {
+    margin-bottom: 1rem;
+    margin-top: 22rem;
+
+    border: solid 5px cadetblue;
+    border-radius: 5px;
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
+#contenedor1 {
+    border: solid white 1px;
+    margin: 3rem;
+
+
+}
+
+#card2 {
+    display: flex;
+    justify-content: center;
+    border: solid pink 1px;
+    padding: 2rem;
+}
+
+.card-text{color: pink;}
+
+#preciototal {
+    text-align: center;
+    font-size: 3rem;
+
+    background-color: pink;
+    margin: 5rem;
+
+    border: dashed 2px white;
+    border-radius: 15%;
+
+
+}
+
+.darkmode{background-color: rgb(32,32,44);
+color: white;}
