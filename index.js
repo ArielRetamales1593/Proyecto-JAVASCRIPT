@@ -11,13 +11,13 @@
 
 // Aplicar funciones para simplificar el codigo
 // Ocupar tolowerCase
-// triple===
-// utilizar funcion constructora
 
 
 
 
-// urgente   funcion borrar-funcion calcular-------------ocupar storage
+
+
+
 
 
 
@@ -31,7 +31,7 @@ const inputContraseña = document.getElementById("inputPassword")
 const btn = document.getElementById("btnEnviar")
 
 
-const userData=""
+const userData = ""
 
 
 
@@ -48,16 +48,19 @@ formulario.addEventListener("submit", (e) => {
     console.log(userData)
 
     formulario.reset()
-
-    let usuarioJason=JSON.stringify(userData)
-    localStorage.setItem("usuario",usuarioJason)
+    // local storage datos del usuario 
+    let usuarioJason = JSON.stringify(userData)
+    localStorage.setItem("usuario", usuarioJason)
 
 
 })
 
 
-let saludo= localStorage.getItem("usuario")
+
+let saludo = localStorage.getItem("usuario")
+// Desarollar Saludo
 console.log(saludo)
+
 
 
 // Definicion de constantes
@@ -162,9 +165,9 @@ const tipoSpedales = [{
 
 
 ]
-
-let productosJson=JSON.stringify(tipoSpedales)
-localStorage.setItem("produ",productosJson)
+// LOCAL STORAGE PRODUCTOS
+let productosJson = JSON.stringify(tipoSpedales)
+localStorage.setItem("produ", productosJson)
 // let div2;
 
 
@@ -190,27 +193,18 @@ botonMostrar.addEventListener("click", fmuestra)
 
 
 
-function agregarCarrito(pedalesId){
-let item=tipoSpedales.find((pedales)=>pedales.id===pedalesId)
-carrito.push(item)
-console.log(carrito)
-
+function agregarCarrito(pedalesId) {
+    let item = tipoSpedales.find((pedales) => pedales.id === pedalesId)
+    carrito.push(item)
+    console.log(carrito)
 
 }
 
 
 
-
-
-
-
-
-
-
-
 // Transformar a cards-- array de elementos a traves de un for each
 
-const carrito=[];
+const carrito = [];
 
 tipoSpedales.forEach((pedal) => {
     let column = document.createElement("div")
@@ -239,29 +233,29 @@ tipoSpedales.forEach((pedal) => {
 
     contenedorProductos.append(column)
 
-  
- 
+
+
 
 
 })
 
-
+// AGREGAR AL CARRO
 function agregarCarrito(pedalesId) {
     let item = tipoSpedales.find((pedales) => pedales.id === pedalesId)
     carrito.push(item)
     console.log(carrito)
-  renderCarro()
-  calcularTotal()
-   
+    renderCarro()
+    calcularTotal()
+
 
 }
-
-const contenedorCarrito=document.querySelector("#contenedor1")
-const renderCarro=()=>{
-contenedorCarrito.innerHTML=" "
-carrito.forEach((item)=>{
-let div3=document.createElement("div")
-div3.innerHTML=`
+// CONTENEDOR CARRITO
+const contenedorCarrito = document.querySelector("#contenedor1")
+const renderCarro = () => {
+    contenedorCarrito.innerHTML = " "
+    carrito.forEach((item) => {
+        let div3 = document.createElement("div")
+        div3.innerHTML = `
 <div id="card2">
 <div id="imgbox2">
 <img src=${item.img}
@@ -276,40 +270,40 @@ div3.innerHTML=`
 <button onclick="eliminarItem(${item.id})"> Eliminar item</button>
 <div>
 `
-contenedorCarrito.append(div3)
+        contenedorCarrito.append(div3)
 
 
 
 
 
-}     )
+    })
 
 
 
 
 }
-
-const eliminarItem=(id)=>{
-let borrar=carrito.find((producto)=>producto.id===id)
-let indice=carrito.indexOf(borrar)
-carrito.splice(indice,1)
-renderCarro()
-calcularTotal()
+// ELIMINAR ITEM
+const eliminarItem = (id) => {
+    let borrar = carrito.find((producto) => producto.id === id)
+    let indice = carrito.indexOf(borrar)
+    carrito.splice(indice, 1)
+    renderCarro()
+    calcularTotal()
 
 }
 
 
 
+// CALCULAR TOTAL
+const precio = document.querySelector("#preciototal")
+calcularTotal = () => {
+    let cont = 0
+    carrito.forEach((pre) => {
 
-const precio=document.querySelector("#preciototal")
-calcularTotal=()=>{
-let cont= 0
-carrito.forEach((pre)=> {
+        cont += pre.valor
+    })
 
-    cont += pre.valor
-})
-
-precio.innerHTML= "Total: "+cont
+    precio.innerHTML = "Total: " + cont
 }
 
 
@@ -618,7 +612,7 @@ boton1.addEventListener("click", () => {
 
 
 
- 
+
 
 
 
@@ -668,37 +662,38 @@ boton1.addEventListener("click", () => {
 })
 
 
-// modo oscuro
+// MODO OSCURO CON LOCAL STORAGE
 
-const bdark= document.querySelector("#bdark");
-const body=document.querySelector("body");
+const bdark = document.querySelector("#bdark");
+const body = document.querySelector("body");
 cargar();
 
-bdark.addEventListener("click",e =>{
-body.classList.toggle("darkmode")
-store(body.classList.contains("darkmode"))
- 
+bdark.addEventListener("click", e => {
+    body.classList.toggle("darkmode")
+    store(body.classList.contains("darkmode"))
+
 
 
 
 })
 
 
-function cargar(){
-    const darkmode=localStorage.getItem("darkmode");
-    if(!darkmode){
+function cargar() {
+    const darkmode = localStorage.getItem("darkmode");
+    if (!darkmode) {
 
         store("false");
 
-     } else if (darkmode==="true"){
+    } else if (darkmode === "true") {
 
-       body.classList.add("darkmode"); }
+        body.classList.add("darkmode");
     }
-  
+}
 
- 
 
-function store(value){
 
-    localStorage.setItem("darkmode",value)
+
+function store(value) {
+
+    localStorage.setItem("darkmode", value)
 }
